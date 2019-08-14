@@ -1,0 +1,453 @@
+
+	<!-- 栏目管理 -->
+	<div id="category-manage">
+		<span style="color: grey; display: inline-block;">栏目管理></span>
+		<!-- 按钮组 -->
+		<div class="btns-div">
+			<button type="button" class="btn btn-success">新增</button>
+			<button type="button" class="btn btn-danger">批量删除</button>
+		</div>
+		
+		
+		
+		<!-- 表格 -->
+		<div class="table-div">
+			<table class="table table-bordered text-center">
+			 	<thead>
+			 		<tr>
+			 			<th class="text-center">编号</th>
+				 		<th class="text-center">名称</th>
+				 		<th class="text-center">父栏目</th>
+				 		<th class="text-center">描述</th>
+				 		<th class="text-center">操作</th>
+			 		</tr>
+			 	</thead>
+				<tbody>
+					<!-- <tr>
+						<th class="text-center"><input type="checkbox"></th>
+						<th class="text-center">名称</th>
+						<th class="text-center">父栏目</th>
+						<th class="text-center">描述</th>
+						<th class="text-center"><i class="fa fa-pencil-square-o" aria-hidden="true" title="编辑"></i>
+						<i class="fa fa-trash-o" aria-hidden="true" title="删除"></i></th>
+					</tr> -->
+				</tbody>
+			</table>
+		</div>
+		
+		<div id="page" style="width:450px;margin:0 auto;"></div>
+		</div>
+		<!-- 模态框 -->
+		<div class="modal fade" id="myModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						
+						<button class="btn btn-default close" data-dismiss="modal">&times;</button>
+						<span class="modal-title">添加栏目</span>
+					</div>
+					<div class="modal-body">
+						<!-- 录入信息的表单 -->
+						<form action="" class="form-horizontal">
+							<!-- 栏目名称 -->
+							<div class="form-group">
+								<label for="username" class="col-sm-2 control-label">栏目名称:</label>
+								<div class="col-sm-10 ">
+									<input id="username" type="text" class="form-control">
+								</div>
+							</div>
+							
+							<!-- 父栏目 -->
+							<div class="form-group">
+								<label for="username" class="col-sm-2 control-label">父栏目:</label>
+								<div class="col-sm-10">
+									<select class="form-control">
+										<option>请选择</option>
+										
+									</select>
+								</div>
+							  </div>
+							 
+					
+							<!-- 描述 -->
+							<div class="form-group">
+								<label for="username" class="col-sm-2 control-label">描述:</label>
+								<div class="col-sm-10">
+									<textarea class="form-control " rows="4"></textarea>
+								</div>
+							</div>
+							
+							
+						</form>
+					</div>
+					<div class="modal-footer" >
+						<button class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary btn-default" id="to-save" data-container="body" data-toggle="popover" data-placement="top" data-content="亲,请输入完整的信息呢">保存</button>
+						
+					</div>
+			
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="myModal2">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						
+						<button class="btn btn-default close" data-dismiss="modal">&times;</button>
+						<span class="modal-title">修改栏目信息</span>
+					</div>
+					<div class="modal-body">
+						<!-- 录入信息的表单 -->
+						<form action="" class="form-horizontal">
+							<!-- 栏目名称 -->
+							<div class="form-group">
+								<label for="username" class="col-sm-2 control-label">栏目名称:</label>
+								<div class="col-sm-10 ">
+									<input id="username" type="text" class="form-control">
+								</div>
+							</div>
+							
+							<!-- 父栏目 -->
+							<div class="form-group">
+								<label for="username" class="col-sm-2 control-label">父栏目:</label>
+								<div class="col-sm-10">
+									<select class="form-control">
+										<option>请选择</option>
+										
+									</select>
+								</div>
+							  </div>
+							 
+					
+							<!-- 描述 -->
+							<div class="form-group">
+								<label for="username" class="col-sm-2 control-label">描述:</label>
+								<div class="col-sm-10">
+									<textarea class="form-control " rows="4"></textarea>
+								</div>
+							</div>
+							
+							
+						</form>
+					</div>
+					<div class="modal-footer" >
+						<button class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary btn-default" id="to-Change" data-container="body" data-toggle="popover" data-placement="top" data-content="亲,请输入完整的信息呢">修改</button>
+						
+					</div>
+			
+				</div>
+			</div>
+		</div>
+		
+		<nav aria-label="Page navigation">
+			<ul class="pagination" style="margin: 0px;">
+				<!-- <li>
+					<a href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li>
+					<a href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li> -->
+			</ul>
+		</nav>
+		
+	</div>
+<script type="text/javascript">
+	console.log(getAjax);
+	console.log($);
+	getAllCategory();
+	
+	
+	// 页面显示拿到的信息  以及一个贼low的分页
+	function getAllCategory(){
+		$('tbody').empty();
+		$('.pagination').empty();
+		getAjax('manager/category/findAllCategory','get',null,function(res){
+			console.log(res.data);
+			if(res.data && res.data.length>0){
+				var a = 12;
+				var pages = res.data.length / a +1;
+				$('.pagination').append(`
+					<li>
+						<a href="#" aria-label="Previous id="1">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+				`);
+				for(var i = 1; i < pages;i++){
+					$('.pagination').append(`
+						<li><a href="#" id="`+i+`">`+i+`</a></li>
+					`);
+				}
+				$('.pagination').append(`
+					<li>
+						<a href="#" aria-label="Next" id="2">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				`);
+				
+				
+				// 贼lowe的分页
+				res.data.forEach(function(item,index){
+					if(item.parent){
+						var parent = item.parent.id;
+					}else{
+						var parent = '---';
+					}
+					if(index < 12 && index >= 0){
+						$('tbody').append(`
+							<tr>
+								<th class="text-center" ><input type="checkbox" value="`+item.id+`"></th>
+								<th class="text-center">`+item.name+`</th>
+								<th class="text-center">`+parent+`</th>
+								<th class="text-center">`+item.comment+`</th>
+								<th class="text-center">
+								<i class="fa fa-pencil-square-o" aria-hidden="true" title="编辑" data-id="`+item.id+`" data-no="`+item.no+`"></i>
+								<i class="fa fa-trash-o" aria-hidden="true" title="删除" data-id="`+item.id+`" ></i></th>
+							</tr>
+						`);
+					}				
+				});
+				$('.pagination li').click(function(e){
+					// console.log(e.target.id);
+					$('tbody').empty();
+					var num = e.target.id -1;
+					var num2 = e.target.id ;
+					console.log(num,num2);
+					res.data.forEach(function(item,index){
+						if(item.parent){
+							var parent = item.parent.id;
+						}else{
+							var parent = '---';
+						}
+						
+						if(index >= num*12 && index < num2 * 12 ){
+							$('tbody').append(`
+								<tr>
+									<th class="text-center" ><input type="checkbox" value="`+item.id+`"></th>
+									<th class="text-center">`+item.name+`</th>
+									<th class="text-center">`+parent+`</th>
+									<th class="text-center">`+item.comment+`</th>
+									<th class="text-center">
+									<i class="fa fa-pencil-square-o" aria-hidden="true" title="编辑" data-id="`+item.id+`"></i>
+									<i class="fa fa-trash-o" aria-hidden="true" title="删除" data-id="`+item.id+`" ></i></th>
+								</tr>
+							`);
+						}
+									
+					});
+				});
+				
+				
+				
+			}
+		},function(error){
+			console.log(error);
+		});
+	}
+	
+	// 单个删除
+	function deleteCategoryById(obj){
+		getAjax('manager/category/deleteCategoryById','GET',obj,function(res){
+				//重新获取页面，更新数据
+				alert('删除成功');
+				// $('tbody').empty();
+				getAllCategory();
+		},function(error){
+			alert('删除失败');
+		});
+	}
+	$('.table-div tbody').click(function(event){
+		var target = event.target;
+		if(target.title === '删除'){
+			var id = $(target).attr('data-id');
+			console.log(id);
+
+			deleteCategoryById({id:id});
+		}
+		
+		// 修改
+		if(target.title === '编辑'){
+			getModel();
+			getAjax('manager/category/findAllCategory','get',null,function(res){
+				if(res.data && res.data.length>0){
+					res.data.forEach(function(item){
+						// console.log(item);
+						var id = $(target).attr('data-id');
+						// console.log(id);
+						if(item.id == id){
+							var name = $('#myModal2 [type=text]').val(item.name);
+							var parent = $('#myModal2 select').val(item.parent);
+							var comment = $('#myModal2 textarea').val(item.comment);
+							$('#myModal2').modal('show');
+							// 保存
+							$('#to-Change').click(function(e){
+								e.stopImmediatePropagation();
+								var name = $('#myModal2 [type=text]').val();
+								var parent = $('#myModal2 select').val();
+								var comment = $('#myModal2 textarea').val();
+								
+								
+								var parents = getAjax('manager/category/findAllCategory','get',null,function(res){
+									console.log(res.data,'为父栏目选择');
+									res.data.forEach(function(item,index){
+										
+										if(item.id == parent){
+											var obj1 = {};
+											var obj1 = {
+												id:id,
+												name:name,
+												parentId:item.id,
+												comment:comment
+											}
+											// console.log(obj);
+											saveOrUpdateCategory(obj1);
+											
+										}	
+									})
+								},function(error){})
+								
+								$('#myModal2').modal('hide');
+								$('.modal select').empty();
+							});
+						}
+					})
+				}
+			},function(error){})
+		}
+	});
+	
+	
+	
+	//新增和批量删除
+	$('.btns-div').click(function(event){
+		var name = $(event.target).text();
+		// 批量删除
+		if(name === '批量删除'){
+			var inputs = $('input');
+			inputs = Array.prototype.slice.call(inputs,0);
+			var ids = inputs.filter(function(item){
+				return item.checked;
+			}).map(function(item){
+				return item.value;
+			});
+			batchDeleteCategory({ids:ids.join()});
+		}
+		if(name === '新增'){
+			getModel();
+			$('#myModal [type=text]').val(null);
+			$('#myModal select').val(null);
+			$('#myModal textarea').val(null);
+			$('#myModal').modal('show');
+			}
+			
+			// 保存
+			$('#to-save').click(function(e){
+				e.stopImmediatePropagation()
+				var name = $('#myModal [type=text]').val();
+				var parent = $('#myModal select').val();
+				var comment = $('#myModal textarea').val();
+				
+				var parents = getAjax('manager/category/findAllCategory','get',null,function(res){
+					console.log(res.data,'为父栏目选择');
+					res.data.forEach(function(item,index){
+						// console.log(item.id);
+						// console.log(name,parent,comment);
+						if(item.id == parent){
+							var obj2 = {};
+							var obj2 = {
+								name:name,
+								parentId:item.id,
+								comment:comment
+							}
+							// console.log(obj);
+							saveOrUpdateCategory(obj2);
+							
+						}	
+					})
+				},function(error){})
+				
+				// console.log(name,parent,comment);
+				// var obj2 = {};
+				// var obj2 = {
+				// 	name:name,
+				// 	parent:parent.split(),
+				// 	comment:comment
+				// }
+				// // console.log(obj);
+				// saveOrUpdateCategory(obj2);
+				
+				$('#myModal').modal('hide');
+				$('.modal select').empty();
+			});
+			
+	});
+	
+	
+	
+	
+	// 新增
+	function saveOrUpdateCategory(obj){
+		getAjax('manager/category/saveOrUpdateCategory','post',obj,function(res){
+			alert('保存成功');
+			// $('tbody').empty();
+			getAllCategory();
+			
+		},function(error){
+			console.log(error);
+		});
+	}
+	
+	// 批量删除
+	function batchDeleteCategory(obj){
+		getAjax('manager/category/batchDeleteCategory','post',obj,function(res){
+			alert('删除成功');
+			$('tbody').empty();
+			getAllCategory();
+		},function(error){
+			alert('删除失败');
+			console.log(error);
+		});	
+	}
+	
+	function getModel(){
+		getAjax('manager/category/findAllCategory','get',null,function(res){
+			console.log(res.data,'父栏目选择');
+			// 遍历获取的数据  将他们转为父栏目
+			if(res.data && res.data.length>0){
+				res.data.forEach(function(item){
+					// if(item.parent){
+					// 	$('.modal select').append(`
+					// 		<option value="`+item.parent.id+`">`+item.parent.name+`</option>
+					// 	`)
+					// }
+					// console.log(item.name);
+					$('.modal select').append(`
+						<option value="`+item.id+`">`+item.name+`</option>
+					`)
+					
+					
+					
+				});
+			}
+			
+		},function(error){
+			console.log(error);
+		});
+	}
+	
+	
+	
+</script>

@@ -1,0 +1,178 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	background-color: #D9EDF7;
+}
+.float{
+	float: left;
+}
+/* 左边 */
+.left{
+	width: 18%;
+	height: 720px;
+}
+
+/* logo */
+.leftTop{
+	width: 100%;
+	height: 10%;
+	background: #3D556D;
+}
+.leftTop div{
+	width: 40px;
+	height: 40px;
+	background: url(../image/logo.jpg);
+	background-size: 100% 100%;
+	margin-left: 30px;
+	margin-top: 5%;
+}
+.leftTop span{
+	display: inline-block;
+	margin-top: 7%;
+	margin-left: 7%;
+	font-size: 22px;
+	color: white;
+}
+
+/* 导航栏 */
+.leftBottom{
+	margin-top: 5%;
+	width: 100%;
+	height: 84%;
+}
+.leftBottom div{
+	width: 100%;
+	height: 10%;
+	padding-left: 40px;
+	padding-right: 30px;
+	padding-top: 20px;
+	font-size: 18px;
+	line-height: 18px;
+	border-bottom: 1px solid gray;
+	cursor: pointer;
+}
+.leftBottom div:hover{
+	background-color: #9D9D9D;
+}
+
+
+.top{
+	margin-right: 16px;
+	margin-top: -0.5px;
+}
+
+
+
+/* 右边 */
+.right{
+	width: 81.5%;
+	height: 720px;
+	
+}
+/* 用户登录 */
+.rightTop{
+	width: 100%;
+	height: 10%;
+	background: skyblue;
+	border-bottom: 1px dashed gray;
+}
+.rightTop>span{
+	font-size: 24px;
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+.info{
+	width: 10%;
+	height: 100%;
+	float: right;
+	font-size: 18px;
+	padding-top: 15px;
+}
+.info-name{
+	display: inline-block;
+	margin-top: 8px;
+}
+.info div{
+	border-radius: 25px;
+	width: 40px;
+	height: 40px;
+	float: left;
+	background: url(../image/logo.jpg);
+	margin-right: 10px;
+}
+.info-go{
+	margin-top: 10px;
+	margin-right: 16px;
+}
+
+/* 分页面显示区 */
+.rightBottom{
+	width: 100%;
+	height: 90%;
+	background-color: aliceblue;
+	padding: 10px 10px 20px;
+	
+}
+
+/* 栏目管理页面 */
+
+
+/* 按钮位置 */
+.btns-div{
+	margin: 10px 10px;
+}
+/* 表格div */
+.table-div{
+	margin-top: 10px;
+}
+
+/* 表格内图标的颜色 */
+.table-div th i{
+	cursor: pointer;
+	margin-right: 10px;
+}
+.table-div th i:last-child{
+	margin-right: 0;
+}
+.table-div th i[title='编辑']{
+	color: #5CB85C;
+}
+.table-div th i[title='删除']{
+	color: #C9302C;
+}
+nav{
+	margin-left: 44%;
+	
+}
+.category-manage{
+	overflow: hidden;
+}
+
+/* 首页内容 */
+.home{
+	padding: 0px 20px 0px;
+}
+#main2{
+	margin-left: 10px;
+	margin-top:35px;
+}
+
+
+/* 咨询管理页面内容 */
+.info-btns-div label{
+	margin-top: 7px;
+	margin-left: 10px;
+}
+#xiaLaOuter{
+	margin-left: -25px;
+}
+
+/* 用户信息页面 */
+.caption div{
+	line-height: 40px;
+	font-size: 18px;
+	font-family: '宋体';
+}

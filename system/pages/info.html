@@ -1,0 +1,462 @@
+<!-- 咨询管理 -->
+<div>
+	<span style="color: grey; display: inline-block;">咨询管理></span>
+	<!-- 按钮组 -->
+	<div class="info-btns-div">
+		<!-- 下拉选项 -->
+		<div class="form-group">
+			<label for="username" class="col-sm-1 control-label">父栏目:</label>
+			<div class="col-sm-4 " id="xiaLaOuter">
+				<select class="form-control" id="xiaLa">
+					<option>请选择</option>
+					
+				</select>
+			</div>
+		</div>
+		<button type="button" class="btn btn-success">新增</button>
+		<button type="button" class="btn btn-danger">批量删除</button>
+	</div>
+	
+	<!-- 表格 -->
+	<div class="table-div">
+		<table class="table table-bordered text-center">
+		 	<thead>
+		 		<tr>
+		 			<th class="text-center">编号</th>
+			 		<th class="text-center">文章标题</th>
+			 		<th class="text-center">所属栏目</th>
+			 		<th class="text-center">排列方式</th>
+			 		<th class="text-center">作者</th>
+			 		<th class="text-center">发布时间</th>
+			 		<th class="text-center">阅读次数</th>
+			 		<th class="text-center">操作</th>
+		 		</tr>
+		 	</thead>
+			<tbody>
+				<!-- <tr>
+					<th class="text-center"><input type="checkbox"></th>
+					<th class="text-center">文章标题</th>
+					<th class="text-center">所属栏目</th>
+					<th class="text-center">排列方式</th>
+					<th class="text-center">作者</th>
+					<th class="text-center">发布时间</th>
+					<th class="text-center">阅读次数</th>
+					<th class="text-center"><i class="fa fa-pencil-square-o" aria-hidden="true" title="编辑"></i>
+					<i class="fa fa-trash-o" aria-hidden="true" title="删除"></i></th>
+				</tr> -->
+			</tbody>
+		</table>
+	</div>
+	
+	
+	<!-- 模态框 -->
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					
+					<button class="btn btn-default close" data-dismiss="modal">&times;</button>
+					<span class="modal-title">发布咨询</span>
+				</div>
+				<div class="modal-body">
+					<!-- 录入信息的表单 -->
+					<form action="" class="form-horizontal">
+						<!-- 栏目名称 -->
+						<div class="form-group">
+							<label for="username" class="col-sm-2 control-label">标题:</label>
+							<div class="col-sm-10 ">
+								<input id="username" type="text" class="form-control">
+							</div>
+						</div>
+						
+						<!-- 父栏目 -->
+						<div class="form-group">
+							<label for="username" class="col-sm-2 control-label">所属栏目:</label>
+							<div class="col-sm-10">
+								<select class="form-control">
+									<option>请选择</option>
+									
+								</select>
+							</div>
+						  </div>
+						 
+						 <!-- 风格 -->
+						 <div class="form-group">
+						 	<label for="male" class="col-sm-2 control-label">排列方式:</label>
+						 	<div class="col-sm-10 ">
+						 		<div class="radio-inline">
+						 			<label for="male">
+						 				<input id="male" type="radio" name="liststyle" value="style-one" /><img src="./image/style-one.jpg" width="400px";height="60px">
+						 			</label>
+						 		</div>
+						 		<div class="radio-inline">
+						 			<label for="female">
+						 				<input type="radio" name="liststyle" id="female" value="style-two" /><img src="./image/style-two.jpg" width="392px";height="60px">
+						 			</label>
+						 		</div>
+						 	</div>
+						 </div>
+				
+						<!-- 描述 -->
+						<div class="form-group">
+							<label for="username" class="col-sm-2 control-label">正文:</label>
+							<div class="col-sm-10">
+								<textarea class="form-control " rows="4"></textarea>
+							</div>
+						</div>
+						
+						
+					</form>
+				</div>
+				<div class="modal-footer" >
+					<button class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-default" id="to-save" data-container="body" data-toggle="popover" data-placement="top" data-content="亲,请输入完整的信息呢">保存</button>
+					
+				</div>
+		
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="myModal2">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					
+					<button class="btn btn-default close" data-dismiss="modal">&times;</button>
+					<span class="modal-title">发布咨询</span>
+				</div>
+				<div class="modal-body">
+					<!-- 录入信息的表单 -->
+					<form action="" class="form-horizontal">
+						<!-- 栏目名称 -->
+						<div class="form-group">
+							<label for="username" class="col-sm-2 control-label">标题:</label>
+							<div class="col-sm-10 ">
+								<input id="username" type="text" class="form-control">
+							</div>
+						</div>
+						
+						<!-- 父栏目 -->
+						<div class="form-group">
+							<label for="username" class="col-sm-2 control-label">所属栏目:</label>
+							<div class="col-sm-10">
+								<select class="form-control">
+									<option>请选择</option>
+									
+								</select>
+							</div>
+						  </div>
+						 
+						 <!-- 性别 -->
+						 <div class="form-group">
+						 	<label for="male" class="col-sm-2 control-label">性别:</label>
+						 	<div class="col-sm-10 ">
+						 		<div class="radio-inline">
+						 			<label for="male">
+						 				<input id="male" type="radio" name="liststyle" value="style-one" /><img src="./image/style-one.jpg" width="200px";height="40px">
+						 			</label>
+						 		</div>
+						 		<div class="radio-inline">
+						 			<label for="female">
+						 				<input type="radio" name="liststyle" id="female" value="style-two" /><img src="./image/style-two.jpg" width="200px";height="50px">
+						 			</label>
+						 		</div>
+						 	</div>
+						 </div>
+				
+						<!-- 描述 -->
+						<div class="form-group">
+							<label for="username" class="col-sm-2 control-label">正文:</label>
+							<div class="col-sm-10">
+								<textarea class="form-control " rows="4"></textarea>
+							</div>
+						</div>
+						
+						
+					</form>
+				</div>
+				<div class="modal-footer" >
+					<button class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-default" id="to-change" data-container="body" data-toggle="popover" data-placement="top" data-content="亲,请输入完整的信息呢">保存</button>
+					
+				</div>
+		
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 实现分页 -->
+	<nav aria-label="Page navigation">
+		<ul class="pagination">
+			
+		</ul>
+	</nav>
+
+</div>
+
+<script>
+	// console.log(getAjax);
+	// console.log($);
+	// getAllCategory(xialaName);
+	getModel2();
+	// var xialaName = '请选择';
+	$('#xiaLa ').click(function(e){
+		e.stopImmediatePropagation();
+		// $('#xiaLa').empty();
+		// getModel();
+		$('tbody').empty();
+		var xialaName = $('#xiaLa').val();
+		// console.log(xialaName);
+		getAllCategory(xialaName);
+		// $('#xiaLa').empty();
+	})
+	// getAllCategory(xialaName);
+	
+	// 删除信息
+	function deleteCategoryById(obj){
+		getAjax('manager/article/deleteArticleById','GET',obj,function(res){
+				//重新获取页面，更新数据
+				alert('删除成功');
+				// $('tbody').empty();
+				getAllCategory();
+		},function(error){
+			alert('删除失败');
+		});
+	}
+	$('.table-div tbody').click(function(event){
+		event.stopImmediatePropagation();
+		var target = event.target;
+		if(target.title === '删除'){
+			var id = $(target).attr('data-id');
+			console.log(id);
+	
+			deleteCategoryById({id:id});
+		}
+		
+		// 修改
+		if(target.title == '编辑'){
+			getModel();
+			getAjax('index/findArticleByCategoryId','get',null,function(res){
+				if(res.data && res.data.length>0){
+					res.data.forEach(function(item){
+						// console.log(item);
+						var id = $(target).attr('data-id');
+						// console.log(id);
+						if(item.id == id){
+							$('#myModal2 [type=text]').val(item.title);
+							$('#myModal2 select').val(item.category.id);
+							$('#myModal2 [type=radio][value='+item.liststyle+']').prop('checked',true);
+							$('#myModal2 textarea').val(item.content);
+							$('#myModal2').modal('show');
+							// 保存
+							$('#to-change').click(function(e){
+								e.stopImmediatePropagation();
+								var title = $('#myModal2 [type=text]').val();
+								var liststyle = $('#myModal2 [name=liststyle]:checked').val();
+								var categoryId = $('#myModal2 select').val();
+								var content = $('#myModal2 textarea').val();
+								
+								
+								var obj1 = {};
+								var obj1 = {
+									id:item.id,
+									title:title,
+									liststyle:liststyle,
+									content:content,
+									categoryId:categoryId
+									
+								}
+								console.log(obj1);
+								saveOrUpdateCategory(obj1);
+								
+								
+								$('#myModal2').modal('hide');
+								$('.modal select').empty();
+							});
+							
+						}
+					})
+				}
+			},function(error){})
+		}
+	});
+	
+	
+	// 批量删除
+	$('.info-btns-div').click(function(event){
+		var name = $(event.target).text();
+		// 批量删除
+		if(name === '批量删除'){
+			console.log(11);
+			var inputs = $('input');
+			inputs = Array.prototype.slice.call(inputs,0);
+			var ids = inputs.filter(function(item){
+				return item.checked;
+			}).map(function(item){
+				return item.value;
+			});
+			batchDeleteCategory({ids:ids.join()});
+		}
+		if(name === '新增'){
+			getModel();
+			$('#myModal [type=text]').val(null);
+			$('#myModal select').val(null);
+			$('#myModal [type=radio]:checked').prop('checked',false);
+			$('#myModal textarea').val(null);
+			$('#myModal').modal('show');
+			}
+			
+		// 保存
+		$('#to-save').click(function(e){
+			e.stopImmediatePropagation()
+			var title = $('#myModal [type=text]').val();
+			var liststyle = $('.modal [name=liststyle]:checked').val();
+			var categoryId = $('#myModal select').val();
+			var content = $('#myModal textarea').val();
+			
+			var parents = getAjax('manager/category/findAllCategory','get',null,function(res){
+				// console.log(res.data,'为父栏目选择');
+				res.data.forEach(function(item,index){
+					// console.log(item.id);
+					console.log(title,liststyle,content,categoryId);
+					if(item.id == categoryId){
+						var obj2 = {};
+						var obj2 = {
+							title:title,
+							liststyle:liststyle,
+							content:content,
+							categoryId:categoryId
+							
+						}
+						// console.log(obj);
+						saveOrUpdateCategory(obj2);
+						
+					}	
+				})
+			},function(error){})
+			
+			$('#myModal').modal('hide');
+			$('.modal select').empty();
+		});
+	});
+	
+	
+	
+	// 新增函数
+	function saveOrUpdateCategory(obj){
+		getAjax('manager/article/saveOrUpdateArticle','post',obj,function(res){
+			alert('保存成功');
+			// $('tbody').empty();
+			getAllCategory();
+			
+		},function(error){
+			console.log(error);
+		});
+	}
+	
+	// 批量删除函数
+	function batchDeleteCategory(obj){
+		getAjax('manager/article/batchDeleteArticle','post',obj,function(res){
+			alert('删除成功');
+			$('tbody').empty();
+			getAllCategory();
+		},function(error){
+			alert('删除失败');
+			console.log(error);
+		});	
+	}
+	
+	
+	
+	// 页面显示查询的信息
+	function getAllCategory(name){
+		$('tbody').empty();
+		var result = name;
+		// console.log(result);
+		getAjax('index/findArticleByCategoryId','get',null,function(res){
+			console.log(res.data);
+			console.log(result);
+			if(res.data && res.data.length>0){
+				
+					res.data.forEach(function(item,index){
+						// console.log(item.category);
+						var lanMu = [];
+						if(item.category){
+							// console.log(item.category.id);
+							lanMu.unshift(item.category.name);
+							if(result == item.category.id){
+								// $('tbody').empty();
+								// 添加表格数据
+								$('tbody').append(`
+									<tr>
+										<th class="text-center"><input type="checkbox" value="`+item.id+`"></th>
+										<th class="text-center">`+item.title+`</th>
+										<th class="text-center">`+lanMu[0]+`</th>
+										<th class="text-center">`+item.liststyle+`</th>
+										<th class="text-center">`+item.author+`</th>
+										<th class="text-center">`+item.publishtime+`</th>
+										<th class="text-center">`+item.readtimes+`</th>
+										<th class="text-center"><i class="fa fa-pencil-square-o" aria-hidden="true" title="编辑" data-id="`+item.id+`" ></i>
+										<i class="fa fa-trash-o" aria-hidden="true" title="删除" data-id="`+item.id+`" ></i></th>
+									</tr>
+								`);	
+							}
+						}else{
+							lanMu.unshift('null');
+						}
+						
+										
+					});	
+			}
+		},function(error){
+			console.log(error);
+		});
+	}
+	
+	//查询框
+	function getModel(){
+		getAjax('manager/category/findAllCategory','get',null,function(res){
+			// console.log(res,'父栏目选择');
+			// 遍历获取的数据  将他们转为父栏目
+			// $('#xiaLa').empty();
+			if(res.data && res.data.length>0){
+				res.data.forEach(function(item){
+					$('.modal select').append(`
+						<option value="`+item.id+`">`+item.name+`</option>
+					`);
+					// console.log($('#xiaLa'));
+					// $('#xiaLa').append(`
+					// 	<option value="`+item.id+`">`+item.name+`</option>
+					// `)
+				});
+			}
+			
+		},function(error){
+			console.log(error);
+		});
+	}
+	
+	//下拉查询框
+	function getModel2(){
+		getAjax('manager/category/findAllCategory','get',null,function(res){
+			// console.log(res,'父栏目选择');
+			// 遍历获取的数据  将他们转为父栏目
+			// $('#xiaLa').empty();
+			if(res.data && res.data.length>0){
+				res.data.forEach(function(item){
+					
+					$('#xiaLa').append(`
+						<option value="`+item.id+`">`+item.name+`</option>
+					`)
+				});
+			}
+			
+		},function(error){
+			console.log(error);
+		});
+	}
+	
+	
+</script>
