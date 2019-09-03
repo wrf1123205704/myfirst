@@ -1,0 +1,197 @@
+<!--大体思路： 先创建一个外部div，限定其宽度和高度，overflow：hidden，且设置其position为relative。然后创建一个装图片的div，宽度为所有图片的总宽度，且设置其position为absolute，并且使其中的内容浮动，这样所有的图片就处于一行中。然后为了实现无缝滚动，所以需要在首尾分别添加一张过渡图片。 先添加两个按钮， 使其可以手动轮播，然后只需要添加一个定时器使其朝一个方向自动轮播即可，因为用户有时需要查看详情，所以当鼠标进入时就clear定时器，滑出再定时播放。为了更好地用户体验，我们再下面添加了一排小圆点，用户可以清楚地知道现在所处的位置 最后，利用闭包使得用户可以直接通过点击小点点切换图片。 -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>js实现轮播图</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0
+			}
+			#container{
+			    /* margin-left: 200px; */
+			    width: 400px;
+			    height:240px;
+			    position: relative;
+			    overflow: hidden;
+			}
+			#inner-list{
+			    width: 400%;
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			}
+			#inner-list li{
+			    float: left;
+			}
+			#dot-list{
+			    position: absolute;
+			    bottom:10px;
+			    right:38%;
+			}
+			#dot-list li{
+				float: left;
+				display: inline-block;
+			    width: 20px;
+				height:20px;
+				border-radius: 50%;
+				line-height: 20px;
+				text-align: center;
+			    background: rgba(255,255,255,.3);
+				cursor: pointer;
+				margin-right: 10px;
+			}
+			#dot-list li.cur{
+			    background: rgba(255,255,255,.6);
+			}
+			.btn-ctrl{
+			    position: absolute;
+				cursor: pointer;
+			    top: 35%;
+			    font-size: 36px;
+			    color: red;
+			    font-weight: 500;
+				z-index: 2;
+			}
+			#btn-prev{
+			    left: 0px;
+			}
+			#btn-next{
+			    right: 0px;
+			}
+			li img{
+				width: 400px;
+				max-height:240px;
+				height:240px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				// 获取节点   按钮组   图片组  每个图片   每个按钮    左箭头   右箭头   
+				var eleInners = document.getElementById('inner-list'),
+					buttons = document.getElementById('dot-list'),
+					liImgs = eleInners.getElementsByTagName('li'),
+					liDots = buttons.children,
+					elePrev = document.getElementById('btn-prev'),    //左
+					eleNext = document.getElementById('btn-next'),    //右
+					LI_WIDTH = liImgs[0].offsetWidth,  //offsetWidth  对象滚动的宽度
+					TIME_DURATION = 3000,     //滚动时间
+					interval = null,		//定义的定时器
+					index = 0,     
+					circle = 0;
+				//首先是克隆        深克隆
+				// eleInners.appendChild(liImgs[0].cloneNode(true));
+				//生成小点点
+				for(var i= 0,len = liImgs.length -3;i<=len;i++){
+					var li = document.createElement('li');
+					li.innerHTML = i+1;
+					buttons.appendChild(li)
+				}
+				// 默认第一个为点亮
+				liDots[0].className = 'cur';
+				// 循环遍历小下标匹配index,index对应的值与小下标对应的位置相等时,为下标添加样式
+				function showCurrentDot () {
+					for(var i = 0, len = liDots.length; i < len; i++){
+						liDots[i].className = "";
+					}
+					liDots[index].className = "cur";
+				}
+				
+				
+				// 点击实现左右移动
+				// 点击左
+				elePrev.onclick = function(){
+					var newLeft ;
+					if(eleInners.style.left === "0px"){
+						newLeft = -800;
+					}else{
+						newLeft = parseInt(eleInners.style.left)+400;
+					}
+					eleInners.style.left = newLeft + "px";
+					
+					index--;
+					if(index < 0){
+						index = 2;
+					}
+					showCurrentDot();
+				}
+				// 点击右
+				eleNext.onclick = function(){
+					Right();
+				}
+				function Right(){
+					var newLeft ;
+					if(eleInners.style.left === "-1200px"){
+						newLeft = -400;
+					}else{
+						newLeft = parseInt(eleInners.style.left)-400;
+					}
+					eleInners.style.left = newLeft + "px";
+					// 右移动会一直触发,顺带触发小下标点亮函数
+					index++;
+					if(index > 2){
+						index = 0;
+					}
+					showCurrentDot();
+					
+				}
+				
+				// 向右轮播
+				var timer = null;
+				function autoPlay () {
+					timer = setInterval(function () {
+						Right();
+					},1000);
+				}
+				autoPlay();
+				
+				// 设置鼠标移入时的时间函数停止,离开时时间函数运行
+				var container = document.getElementById('container');
+				container.onmouseenter = function () {
+					clearInterval(timer);
+				}
+				container.onmouseleave = function () {
+					autoPlay();    
+				}
+				
+				 
+				for (var i = 0, len = liDots.length; i < len; i++){
+					(function(i){
+						liDots[i].onclick = function () {
+							var dis = index - i;
+							if(index == 2 && parseInt(eleInners.style.left)!==-1200){
+								dis = dis - 3;     
+							}
+							//和使用prev和next相同，在最开始的照片5和最终的照片1在使用时会出现问题，导致符号和位数的出错，做相应地处理即可
+							if(index == 0 && parseInt(eleInners.style.left)!== -400){
+								dis = 3 + dis;
+							}
+							eleInners.style.left = (parseInt(eleInners.style.left) +  dis * 400)+"px";
+							index = i;
+							showCurrentDot();
+						}
+					})(i);            
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div class="container" id="container" >
+		<div id="btn-prev" class="btn-ctrl">&lt;</div>
+		<div id="btn-next" class="btn-ctrl">&gt;</div>
+		<ul id="inner-list"  style="left:-400px;">
+			<li><img src="./images/Q版3.png" alt="3"/></li>
+		    <li><img src="./images/Q版1.jpg" alt="1"/></li>
+		    <li><img src="./images/Q版2.png" alt="2"/></li>
+		    <li><img src="./images/Q版3.png" alt="3"/></li>
+			<li><img src="./images/Q版1.jpg" alt=""/></li>
+		</ul>
+		<!-- 设置标记点的区域 -->
+		<ul id="dot-list">
+		   
+		</ul>
+	</body>
+</html>
